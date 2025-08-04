@@ -1,0 +1,119 @@
+ <!-- Barra de navegación -->
+<div class="container-main">
+    <nav class="navbar">
+        <div class="navbar-brand">TaskManager</div>
+        <div class="navbar-user">
+            <span class="user-name">Juan Pérez</span>
+            <button class="btn-logout">Cerrar Sesión</button>
+        </div>
+    </nav>
+
+    <!-- Contenedor principal -->
+    <div class="main-container">
+        <!-- Header del dashboard -->
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">Mis Tareas</h1>
+            <button class="btn-create">
+                <span>+</span>
+                Nueva Tarea
+            </button>
+        </div>
+
+        <!-- Sección de filtros -->
+        <div class="filters-section">
+            <div class="filters-row">
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Buscar tareas por título...">
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active">Todas</button>
+                    <button class="filter-btn">Pendientes</button>
+                    <button class="filter-btn">En Progreso</button>
+                    <button class="filter-btn">Completadas</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lista de tareas -->
+        <div class="tasks-container">
+            <div class="tasks-header">
+                Lista de Tareas
+            </div>
+
+            <!-- Tarea 1 -->
+            <div class="task-item">
+                <div class="task-checkbox"></div>
+                <div class="task-info">
+                    <div class="task-title">Revisar propuesta de proyecto</div>
+                    <div class="task-meta">Creada hace 2 días</div>
+                </div>
+                <div class="priority-badge priority-high">Alta</div>
+                <div class="task-date">2024-08-06</div>
+                <div class="task-actions">
+                    <button class="btn-action btn-edit">Editar</button>
+                    <button class="btn-action btn-delete">Eliminar</button>
+                </div>
+            </div>
+
+            <!-- Tarea 2 -->
+            <div class="task-item">
+                <div class="task-checkbox completed"></div>
+                <div class="task-info">
+                    <div class="task-title completed">Completar documentación técnica</div>
+                    <div class="task-meta">Completada hace 1 día</div>
+                </div>
+                <div class="priority-badge priority-medium">Media</div>
+                <div class="task-date">2024-08-05</div>
+                <div class="task-actions">
+                    <button class="btn-action btn-edit">Editar</button>
+                    <button class="btn-action btn-delete">Eliminar</button>
+                </div>
+            </div>
+
+            <!-- Tarea 3 -->
+            <div class="task-item">
+                <div class="task-checkbox"></div>
+                <div class="task-info">
+                    <div class="task-title">Preparar presentación para cliente</div>
+                    <div class="task-meta">Creada hoy</div>
+                </div>
+                <div class="priority-badge priority-low">Baja</div>
+                <div class="task-date">2024-08-10</div>
+                <div class="task-actions">
+                    <button class="btn-action btn-edit">Editar</button>
+                    <button class="btn-action btn-delete">Eliminar</button>
+                </div>
+            </div>
+
+            <!-- Tarea 4 -->
+            <div class="task-item">
+                <div class="task-checkbox"></div>
+                <div class="task-info">
+                    <div class="task-title">Actualizar base de datos</div>
+                    <div class="task-meta">Creada hace 3 días</div>
+                </div>
+                <div class="priority-badge priority-high">Alta</div>
+                <div class="task-date">2024-08-07</div>
+                <div class="task-actions">
+                    <button class="btn-action btn-edit">Editar</button>
+                    <button class="btn-action btn-delete">Eliminar</button>
+                </div>
+            </div>
+
+            <!-- Tarea 5 -->
+            <div class="task-item">
+                <div class="task-checkbox"></div>
+                <div class="task-info">
+                    <div class="task-title">Reunión con equipo de desarrollo</div>
+                    <div class="task-meta">Creada hace 1 día</div>
+                </div>
+                <div class="priority-badge priority-medium">Media</div>
+                <div class="task-date">2024-08-08</div>
+                <div class="task-actions">
+                    <button class="btn-action btn-edit">Editar</button>
+                    <button class="btn-action btn-delete">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

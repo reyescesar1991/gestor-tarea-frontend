@@ -1,1 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --color-primary: #1e40af; /* Azul oscuro primario */
+    --color-secondary: #3b82f6; /* Azul brillante para acentos */
+    --color-background: #f1f5f9; /* Fondo muy claro, casi blanco */
+    --color-container-bg: #ffffff; /* Fondo del contenedor blanco */
+    --color-text-dark: #1f2937; /* Texto principal oscuro */
+    --color-text-medium: #6b7280; /* Texto secundario, descripciones */
+    --color-text-light: #9ca3af; /* Texto de placeholder */
+    --color-border: #e5e7eb; /* Borde de los inputs */
+    --color-border-focus: var(--color-primary); /* Borde de foco */
+    --color-button-bg: var(--color-secondary); /* Fondo del botón */
+    --color-link: #3b82f6; /* Color de los enlaces */
+    --color-shadow-light: rgba(0, 0, 0, 0.05); /* Sombra ligera */
+    --color-shadow-medium: rgba(0, 0, 0, 0.1); /* Sombra media */
+}
+
+/* Estilos Generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-background);
+    background-image: linear-gradient(135deg, var(--color-primary), var(--color-background));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
