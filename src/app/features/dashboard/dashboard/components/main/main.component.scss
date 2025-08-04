@@ -259,6 +259,16 @@
     color: white;
 }
 
+.btn-assignment {
+    background-color: #f3f4f6;
+    color: var(--color-text-medium);
+}
+
+.btn-assignment:hover {
+    background-color: #e79d13;
+    color: white;
+}
+
 /* Estado vacío */
 .empty-state {
     text-align: center;
