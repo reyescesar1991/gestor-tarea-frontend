@@ -24,7 +24,11 @@ export const routes: Routes = [
             {
                 path : 'start',
                 loadComponent : () => import('./features/dashboard/dashboard/components/main/main.component').then(mod => mod.MainComponent),
-            }
+            },
+            {
+                path : 'add-task',
+                loadComponent : () => import('./features/dashboard/dashboard/components/add-task/add-task.component').then(mod => mod.AddTaskComponent),
+            },
         ]
     }
 ];

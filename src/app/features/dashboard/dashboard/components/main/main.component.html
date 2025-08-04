@@ -1,19 +1,12 @@
  <!-- Barra de navegación -->
 <div class="container-main">
-    <nav class="navbar">
-        <div class="navbar-brand">TaskManager</div>
-        <div class="navbar-user">
-            <span class="user-name">Juan Pérez</span>
-            <button class="btn-logout">Cerrar Sesión</button>
-        </div>
-    </nav>
 
     <!-- Contenedor principal -->
     <div class="main-container">
         <!-- Header del dashboard -->
         <div class="dashboard-header">
             <h1 class="dashboard-title">Mis Tareas</h1>
-            <button class="btn-create">
+            <button class="btn-create" (click)="redirectAddTask()">
                 <span>+</span>
                 Nueva Tarea
             </button>
@@ -50,8 +43,8 @@
                 <div class="priority-badge priority-high">Alta</div>
                 <div class="task-date">2024-08-06</div>
                 <div class="task-actions">
-                    <button class="btn-action btn-edit">Editar</button>
-                    <button class="btn-action btn-delete">Eliminar</button>
+                    <button class="btn-action btn-edit" (click)="editTask()">Editar</button>
+                    <button class="btn-action btn-delete" (click)="deleteTask()">Eliminar</button>
                 </div>
             </div>
 
