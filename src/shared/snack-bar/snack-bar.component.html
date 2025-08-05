@@ -1,0 +1,12 @@
+<div class="snackbar-container" *ngIf="visible" [@slideIn]="'visible'">
+    <div class="snackbar {{ type }}" (click)="close()">
+      <div class="snackbar-content">
+        <div class="snackbar-icon">
+          {{ getIcon() }}
+        </div>
+        <div class="snackbar-text">{{ message }}</div>
+      </div>
+      <button class="snackbar-close" (click)="close()">✕</button>
+      <div class="snackbar-progress"></div>
+    </div>
+  </div>

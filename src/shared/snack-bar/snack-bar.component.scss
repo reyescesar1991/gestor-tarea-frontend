@@ -1,0 +1,95 @@
+.snackbar-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+
+  .snackbar {
+    min-width: 300px;
+    max-width: 500px;
+    padding: 14px 20px;
+    margin: 10px;
+    border-radius: 8px;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .snackbar:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+  }
+
+  .snackbar.success {
+    background: linear-gradient(45deg, #28a745, #20c997);
+    border-left: 4px solid #1e7e34;
+  }
+
+  .snackbar.error {
+    background: linear-gradient(45deg, #dc3545, #ff4444);
+    border-left: 4px solid #bd2130;
+  }
+
+  .snackbar.warning {
+    background: linear-gradient(45deg, #ffc107, #ffb822);
+    border-left: 4px solid #d39e00;
+    color: #333;
+  }
+
+  .snackbar.info {
+    background: linear-gradient(45deg, #17a2b8, #0dcaf0);
+    border-left: 4px solid #138496;
+  }
+
+  .snackbar-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .snackbar-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .snackbar-text {
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  .snackbar-close {
+    background: transparent;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 4px;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+
+  .snackbar-close:hover {
+    opacity: 1;
+  }
+
+  .snackbar-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: rgba(255,255,255,0.3);
+    animation: progress 3s linear forwards;
+  }
+
+  @keyframes progress {
+    from { width: 100%; }
+    to { width: 0%; }
+  }

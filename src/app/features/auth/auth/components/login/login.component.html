@@ -4,7 +4,7 @@
             <p id="app-slogan">Organiza tu día, alcanza tus metas</p>
         </div>
 
-        <form id="login-form">
+        <form id="login-form" [formGroup]="formLogin">
             <div id="username-form-group" class="form-group">
                 <label for="username">Usuario o Email</label>
                 <input 
@@ -13,6 +13,7 @@
                     name="username" 
                     placeholder="Ingresa tu usuario o email"
                     required
+                    formControlName="username"
                 >
             </div>
 
@@ -24,6 +25,7 @@
                     name="password" 
                     placeholder="Ingresa tu contraseña"
                     required
+                    formControlName="password"
                 >
             </div>
 
@@ -31,7 +33,7 @@
                 <a href="#" id="forgot-password-link" onclick="showAlert('Funcionalidad de recuperación de contraseña')">¿Olvidaste tu contraseña?</a>
             </div> -->
 
-            <button type="submit" id="login-button" class="login-btn">
+            <button type="submit" id="login-button" class="login-btn" (click)="login()">
                 Iniciar Sesión
             </button>
         </form>
