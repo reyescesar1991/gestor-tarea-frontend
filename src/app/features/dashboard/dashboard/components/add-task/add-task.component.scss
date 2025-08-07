@@ -30,6 +30,7 @@
 }
 
 .form-group {
+    position: relative;
     margin-bottom: 24px;
 }
 
@@ -119,6 +120,13 @@
     background-color: var(--color-primary);
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn-primary:disabled{
+
+        background: #a8a8a8;
+    cursor: not-allowed;
+    box-shadow: none;
 }
 
 .btn-secondary {

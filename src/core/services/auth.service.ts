@@ -11,7 +11,7 @@ import { ICredentials, ILoginResponse } from "../interfaces/auth/credentials.int
 })
 export class AuthService {
 
-    private readonly TOKEN_KEY = 'stockwise_auth_token';
+    private readonly TOKEN_KEY = 'auth_token';
     private http = inject(HttpClient);
     private apiUrl = environment.apiUrl;
 
@@ -38,16 +38,16 @@ export class AuthService {
 
 
     getToken(): string | null {
-        return localStorage.getItem(this.TOKEN_KEY);
+        return sessionStorage.getItem(this.TOKEN_KEY);
     }
 
     //TODO: USER SESSION EN VEZ DE LOCAL
     setToken(token: string): void {
-        localStorage.setItem(this.TOKEN_KEY, token);
+        sessionStorage.setItem(this.TOKEN_KEY, token);
     }
 
     logout(): void {
-        localStorage.removeItem(this.TOKEN_KEY);
+        sessionStorage.removeItem(this.TOKEN_KEY);
         // Aquí podrías limpiar otros datos del usuario si es necesario
     }
 }

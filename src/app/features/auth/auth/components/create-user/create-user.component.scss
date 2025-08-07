@@ -46,6 +46,7 @@
 
 .form-group {
     flex: 1;
+    position: relative;
 }
 
 .label {
@@ -98,6 +99,12 @@
 
 .button:active {
     transform: translateY(0);
+}
+
+.button:disabled {
+    background: #a8a8a8;
+    cursor: not-allowed;
+    box-shadow: none;
 }
 
 .footer {

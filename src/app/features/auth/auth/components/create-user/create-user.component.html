@@ -1,92 +1,116 @@
 <div class="container">
-        <div class="header">
-            <h1 class="title">Crear Cuenta</h1>
-            <p class="subtitle">Completa el formulario para registrarte</p>
-        </div>
-
-        <form class="form" id="registerForm">
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="nombre" class="label">Nombre</label>
-                    <input 
-                        type="text" 
-                        id="nombre" 
-                        name="nombre" 
-                        class="input" 
-                        placeholder="Tu nombre" 
-                        required
-                    >
-                </div>
-                <div class="form-group">
-                    <label for="apellido" class="label">Apellido</label>
-                    <input 
-                        type="text" 
-                        id="apellido" 
-                        name="apellido" 
-                        class="input" 
-                        placeholder="Tu apellido" 
-                        required
-                    >
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="username" class="label">Nombre de Usuario</label>
-                <input 
-                    type="text" 
-                    id="username" 
-                    name="username" 
-                    class="input" 
-                    placeholder="Elige un nombre de usuario" 
-                    required
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="email" class="label">Correo Electrónico</label>
-                <input 
-                    type="email" 
-                    id="email" 
-                    name="email" 
-                    class="input" 
-                    placeholder="tu@email.com" 
-                    required
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="telefono" class="label">Número de Teléfono</label>
-                <input 
-                    type="tel" 
-                    id="telefono" 
-                    name="telefono" 
-                    class="input" 
-                    placeholder="+1 234 567 8900" 
-                    required
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="password" class="label">Contraseña</label>
-                <input 
-                    type="password" 
-                    id="password" 
-                    name="password" 
-                    class="input" 
-                    placeholder="Crea una contraseña segura" 
-                    required
-                >
-            </div>
-
-            <button type="submit" class="button">
-                Crear Cuenta
-            </button>
-        </form>
-
-        <div class="footer">
-            <p class="footer-text">
-                ¿Ya tienes una cuenta? 
-                <a href="#" class="link">Inicia sesión aquí</a>
-            </p>
-        </div>
+    <div class="header">
+        <h1 class="title">Crear Cuenta</h1>
+        <p class="subtitle">Completa el formulario para registrarte</p>
     </div>
+
+    <form class="form" id="registerForm" [formGroup]="formCreateUser">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="nombre" class="label">Nombre</label>
+                <input type="text" id="nombre" name="nombre" class="input" placeholder="Tu nombre" required
+                    formControlName="name">
+                @if (formCreateUser.get('name')?.invalid && (formCreateUser.get('name')?.dirty ||
+                formCreateUser.get('name')?.touched)) {
+                <div *ngIf="formCreateUser.get('name')?.errors as errors">
+                    @if (errors['zodError']) {
+                    <app-label-type typeMessage="error">
+                        {{ errors['zodError'].message }}
+                    </app-label-type>
+                    }
+                </div>
+                }
+            </div>
+            <div class="form-group">
+                <label for="apellido" class="label">Apellido</label>
+                <input type="text" id="apellido" name="apellido" class="input" placeholder="Tu apellido" required
+                    formControlName="lastname">
+                @if (formCreateUser.get('lastname')?.invalid && (formCreateUser.get('lastname')?.dirty ||
+                formCreateUser.get('lastname')?.touched)) {
+                <div *ngIf="formCreateUser.get('lastname')?.errors as errors">
+                    @if (errors['zodError']) {
+                    <app-label-type typeMessage="error">
+                        {{ errors['zodError'].message }}
+                    </app-label-type>
+                    }
+                </div>
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="username" class="label">Nombre de Usuario</label>
+            <input type="text" id="username" name="username" class="input" placeholder="Elige un nombre de usuario"
+                required formControlName="username">
+            @if (formCreateUser.get('username')?.invalid && (formCreateUser.get('username')?.dirty ||
+                formCreateUser.get('username')?.touched)) {
+                <div *ngIf="formCreateUser.get('username')?.errors as errors">
+                    @if (errors['zodError']) {
+                    <app-label-type typeMessage="error">
+                        {{ errors['zodError'].message }}
+                    </app-label-type>
+                    }
+                </div>
+                }
+        </div>
+
+        <div class="form-group">
+            <label for="email" class="label">Correo Electrónico</label>
+            <input type="email" id="email" name="email" class="input" placeholder="tu@email.com" required
+                formControlName="email">
+            @if (formCreateUser.get('email')?.invalid && (formCreateUser.get('email')?.dirty ||
+                formCreateUser.get('email')?.touched)) {
+                <div *ngIf="formCreateUser.get('email')?.errors as errors">
+                    @if (errors['zodError']) {
+                    <app-label-type typeMessage="error">
+                        {{ errors['zodError'].message }}
+                    </app-label-type>
+                    }
+                </div>
+                }
+        </div>
+
+        <div class="form-group">
+            <label for="telefono" class="label">Número de Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" class="input" placeholder="+1 234 567 8900" required
+                formControlName="phone">
+            @if (formCreateUser.get('phone')?.invalid && (formCreateUser.get('phone')?.dirty ||
+                formCreateUser.get('phone')?.touched)) {
+                <div *ngIf="formCreateUser.get('phone')?.errors as errors">
+                    @if (errors['zodError']) {
+                    <app-label-type typeMessage="error">
+                        {{ errors['zodError'].message }}
+                    </app-label-type>
+                    }
+                </div>
+                }
+        </div>
+
+        <div class="form-group">
+            <label for="password" class="label">Contraseña</label>
+            <input type="password" id="password" name="password" class="input" placeholder="Crea una contraseña segura"
+                required formControlName="password">
+            @if (formCreateUser.get('password')?.invalid && (formCreateUser.get('password')?.dirty ||
+                formCreateUser.get('password')?.touched)) {
+                <div *ngIf="formCreateUser.get('password')?.errors as errors">
+                    @if (errors['zodError']) {
+                    <app-label-type typeMessage="error">
+                        {{ errors['zodError'].message }}
+                    </app-label-type>
+                    }
+                </div>
+                }
+        </div>
+
+        <button type="submit" class="button" [disabled]="formCreateUser.invalid" (click)="createUser()">
+            Crear Cuenta
+        </button>
+    </form>
+
+    <div class="footer">
+        <p class="footer-text">
+            ¿Ya tienes una cuenta?
+            <a routerLink="/login" class="link">Inicia sesión aquí</a>
+        </p>
+    </div>
+</div>

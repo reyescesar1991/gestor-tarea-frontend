@@ -1,0 +1,8 @@
+
+<p [ngClass]="{ 'success-message' : typeMessage == 'success',
+                   'warn-message' : typeMessage == 'warn',
+                   'error-message' : typeMessage == 'error',
+ }">
+ 
+ <ng-content></ng-content>
+</p>

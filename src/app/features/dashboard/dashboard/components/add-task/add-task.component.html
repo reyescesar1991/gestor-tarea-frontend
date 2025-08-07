@@ -5,60 +5,106 @@
             <p class="form-subtitle">Completa los campos para crear una nueva tarea</p>
         </div>
 
-        <form id="taskForm" class="task-form">
+        <form id="taskForm" class="task-form" [formGroup]="newTaskForm">
             <div class="form-group">
-                <label for="taskTitle" class="form-label">
+                <label for="titleTask" class="form-label">
                     Título de la tarea
                     <span class="required">*</span>
                 </label>
-                <input 
-                    type="text" 
-                    id="taskTitle" 
-                    name="taskTitle" 
-                    class="form-input" 
-                    placeholder="Escribe el título de tu tarea"
-                    required
-                >
+                <input type="text" id="titleTask" name="titleTask" class="form-input"
+                    placeholder="Escribe el título de tu tarea" required formControlName="titleTask">
+                @if (newTaskForm.get('titleTask')?.invalid && (newTaskForm.get('titleTask')?.dirty ||
+                newTaskForm.get('titleTask')?.touched)) {
+                <div *ngIf="newTaskForm.get('titleTask')?.errors as errors">
+                    @if (errors['zodError']) {
+                    <app-label-type typeMessage="error">
+                        {{ errors['zodError'].message }}
+                    </app-label-type>
+                    }
+                </div>
+                }
             </div>
 
             <div class="form-group">
-                <label for="taskDescription" class="form-label">
+                <label for="descriptionTask" class="form-label">
                     Descripción de la tarea
                 </label>
-                <textarea 
-                    id="taskDescription" 
-                    name="taskDescription" 
-                    class="form-textarea" 
+                <textarea id="descriptionTask" name="descriptionTask" class="form-textarea"
                     placeholder="Describe los detalles de tu tarea (opcional)"
-                ></textarea>
+                    formControlName="descriptionTask"></textarea>
+                @if (newTaskForm.get('descriptionTask')?.invalid && (newTaskForm.get('descriptionTask')?.dirty ||
+                newTaskForm.get('descriptionTask')?.touched)) {
+                <div *ngIf="newTaskForm.get('descriptionTask')?.errors as errors">
+                    @if (errors['zodError']) {
+                    <app-label-type typeMessage="error">
+                        {{ errors['zodError'].message }}
+                    </app-label-type>
+                    }
+                </div>
+                }
             </div>
 
             <div class="form-group">
-                <label for="taskDeadline" class="form-label">
+                <label for="dueDate" class="form-label">
                     Fecha límite
                 </label>
-                <input 
-                    type="date" 
-                    id="taskDeadline" 
-                    name="taskDeadline" 
-                    class="form-input"
-                >
+                <input type="date" id="dueDate" name="dueDate" class="form-input" formControlName="dueDate" required>
+                @if (newTaskForm.get('dueDate')?.invalid && (newTaskForm.get('dueDate')?.dirty ||
+                newTaskForm.get('dueDate')?.touched)) {
+                <div *ngIf="newTaskForm.get('dueDate')?.errors as errors">
+                    @if (errors['zodError']) {
+                    <app-label-type typeMessage="error">
+                        {{ errors['zodError'].message }}
+                    </app-label-type>
+                    }
+                </div>
+                }
             </div>
 
             <div class="form-group">
-                <label for="taskPriority" class="form-label">
+                <label for="priority" class="form-label">
                     Prioridad
                 </label>
-                <select id="taskPriority" name="taskPriority" class="form-select">
-                    <option value="">Selecciona una prioridad</option>
-                    <option value="baja">Baja</option>
-                    <option value="media">Media</option>
-                    <option value="alta">Alta</option>
+                <select id="priority" name="priority" class="form-select" formControlName="priority" required >
+                    <option value="Baja">Baja</option>
+                    <option value="Media">Media</option>
+                    <option value="Alta">Alta</option>
                 </select>
+                @if (newTaskForm.get('priority')?.invalid && (newTaskForm.get('priority')?.dirty ||
+                newTaskForm.get('priority')?.touched)) {
+                <div *ngIf="newTaskForm.get('priority')?.errors as errors">
+                    @if (errors['zodError']) {
+                    <app-label-type typeMessage="error">
+                        {{ errors['zodError'].message }}
+                    </app-label-type>
+                    }
+                </div>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="status" class="form-label">
+                    Estatus
+                </label>
+                <select id="status" name="status" class="form-select" formControlName="status" required >
+                    <option value="En progreso">En progreso</option>
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Terminada">Terminada</option>
+                </select>
+                @if (newTaskForm.get('status')?.invalid && (newTaskForm.get('status')?.dirty ||
+                newTaskForm.get('status')?.touched)) {
+                <div *ngIf="newTaskForm.get('status')?.errors as errors">
+                    @if (errors['zodError']) {
+                    <app-label-type typeMessage="error">
+                        {{ errors['zodError'].message }}
+                    </app-label-type>
+                    }
+                </div>
+                }
             </div>
 
             <div class="form-actions">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary" [disabled]="newTaskForm.invalid" (click)="addTask()">
                     Guardar Tarea
                 </button>
                 <button type="button" class="btn btn-secondary" (click)="redirectToDashboard()">

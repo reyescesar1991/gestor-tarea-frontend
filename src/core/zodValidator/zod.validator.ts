@@ -1,5 +1,5 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
-import { ZodSchema, ZodString } from 'zod';
+import { ZodError, ZodSchema, ZodString } from 'zod';
 
 export function zodValidator<T>(schema: ZodSchema<T> | ZodString): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -7,10 +7,10 @@ export function zodValidator<T>(schema: ZodSchema<T> | ZodString): ValidatorFn {
             schema.parse(control.value);
             return null;
         } catch (error: any) {
-            if (error.errors) {
+            if (error instanceof ZodError) {
                 return {
                     zodError: {
-                        message: error.errors[0].message
+                        message: error.issues[0].message
                     }
                 };
             }

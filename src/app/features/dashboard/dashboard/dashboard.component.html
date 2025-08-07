@@ -3,8 +3,8 @@
     <nav class="navbar">
     <div class="navbar-brand">TaskManager</div>
     <div class="navbar-user">
-        <span class="user-name">Juan Pérez</span>
-        <button class="btn-logout">Cerrar Sesión</button>
+        <span class="user-name">{{nameUser}} {{lastnameUser}}</span>
+        <button class="btn-logout" (click)="logout()">Cerrar Sesión</button>
     </div>
 </nav>
 </div>

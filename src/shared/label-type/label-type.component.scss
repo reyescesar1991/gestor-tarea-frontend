@@ -1,0 +1,65 @@
+/* Contenedor relativo para posicionamiento */
+.form-group-relative {
+  position: relative;
+  /* Puedes agregar estilos adicionales si es necesario */
+}
+
+/* Estilos base para el tooltip */
+.success-message,
+.warn-message,
+.error-message {
+  position: absolute; /* Posicionamiento sobre el campo */
+  top: 100%; /* Se coloca justo debajo del input */
+  left: 0;
+  transform: translateY(5px); /* Un pequeño desplazamiento hacia abajo */
+  width: auto;
+//   min-width: 150px;
+//   max-width: 250px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  text-align: center;
+  z-index: 10; /* Asegura que esté por encima de otros elementos */
+  white-space: nowrap; /* Evita que el texto se rompa */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra para efecto 3D */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none; /* Permite hacer clic a través del tooltip */
+  width: auto;
+}
+
+/* Colores y estilos específicos por tipo */
+.error-message {
+  background-color: rgba(255, 0, 0, 0.8); /* Rojo semitransparente */
+  color: white;
+}
+
+.warn-message {
+  background-color: rgba(255, 165, 0, 0.8); /* Naranja semitransparente */
+  color: white;
+}
+
+.success-message {
+  background-color: rgba(0, 128, 0, 0.8); /* Verde semitransparente */
+  color: white;
+}
+
+/* Puedes añadir una pequeña flecha para el efecto de tooltip */
+.success-message::before,
+.warn-message::before,
+.error-message::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 10px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent rgba(255, 0, 0, 0.8) transparent; /* Ajustar el color de la flecha */
+}
+
+.warn-message::before {
+  border-color: transparent transparent rgba(255, 165, 0, 0.8) transparent;
+}
+
+.success-message::before {
+  border-color: transparent transparent rgba(0, 128, 0, 0.8) transparent;
+}

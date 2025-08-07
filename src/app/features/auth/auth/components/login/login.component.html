@@ -1,48 +1,57 @@
 <div id="login-container" class="login-container">
-        <div id="logo-section" class="logo">
-            <h1 id="app-title">TaskManager</h1>
-            <p id="app-slogan">Organiza tu día, alcanza tus metas</p>
+    <div id="logo-section" class="logo">
+        <h1 id="app-title">TaskManager</h1>
+        <p id="app-slogan">Organiza tu día, alcanza tus metas</p>
+    </div>
+
+    <form id="login-form" [formGroup]="formLogin">
+        <div id="username-form-group" class="form-group">
+            <label for="username">Usuario o Email</label>
+            <input type="text" id="username-input" name="username" placeholder="Ingresa tu usuario o email" required
+                formControlName="username">
+            @if (formLogin.get('username')?.invalid && (formLogin.get('username')?.dirty ||
+            formLogin.get('username')?.touched)) {
+            <div *ngIf="formLogin.get('username')?.errors as errors">
+                @if (errors['zodError']) {
+                <app-label-type typeMessage="error">
+                    {{ errors['zodError'].message }}
+                </app-label-type>
+                }
+            </div>
+            }
         </div>
 
-        <form id="login-form" [formGroup]="formLogin">
-            <div id="username-form-group" class="form-group">
-                <label for="username">Usuario o Email</label>
-                <input 
-                    type="text" 
-                    id="username-input" 
-                    name="username" 
-                    placeholder="Ingresa tu usuario o email"
-                    required
-                    formControlName="username"
-                >
-            </div>
+        <div id="password-form-group" class="form-group">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password-input" name="password" placeholder="Ingresa tu contraseña" required
+                formControlName="password">
+            @if (formLogin.get('password')?.invalid && (formLogin.get('password')?.dirty ||
+            formLogin.get('password')?.touched)) {
+                <div *ngIf="formLogin.get('password')?.errors as errors">
+                    @if (errors['zodError']) {
+                        <app-label-type typeMessage="error">
+                            {{ errors['zodError'].message }}
+                        </app-label-type>
+                    }
+                </div>
+            }
+        </div>
 
-            <div id="password-form-group" class="form-group">
-                <label for="password">Contraseña</label>
-                <input 
-                    type="password" 
-                    id="password-input" 
-                    name="password" 
-                    placeholder="Ingresa tu contraseña"
-                    required
-                    formControlName="password"
-                >
-            </div>
-
-            <!-- <div id="forgot-password-section" class="forgot-password">
+        <!-- <div id="forgot-password-section" class="forgot-password">
                 <a href="#" id="forgot-password-link" onclick="showAlert('Funcionalidad de recuperación de contraseña')">¿Olvidaste tu contraseña?</a>
             </div> -->
 
-            <button type="submit" id="login-button" class="login-btn" (click)="login()">
-                Iniciar Sesión
-            </button>
-        </form>
+        <button type="submit" id="login-button" class="login-btn" (click)="login()" [disabled]="formLogin.invalid">
+            Iniciar Sesión
+        </button>
+    </form>
 
-        <div id="divider-section" class="divider">
-            <span>o</span>
-        </div>
-
-        <div id="register-link-section" class="register-link">
-            ¿No tienes cuenta? <a routerLink="/create-user"  id="register-link" onclick="showAlert('Ir a registro')">Regístrate aquí</a>
-        </div>
+    <div id="divider-section" class="divider">
+        <span>o</span>
     </div>
+
+    <div id="register-link-section" class="register-link">
+        ¿No tienes cuenta? <a routerLink="/create-user" id="register-link"
+            onclick="showAlert('Ir a registro')">Regístrate aquí</a>
+    </div>
+</div>

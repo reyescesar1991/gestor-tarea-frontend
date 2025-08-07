@@ -11,9 +11,9 @@ import { Router, RouterOutlet } from '@angular/router';
 })
 export class AuthComponent {
 
-  constructor(private readonly router : Router){}
+  constructor(private readonly router: Router) { }
 
-    ngOnInit(): void {
+  ngOnInit(): void {
     this.router.navigate(['/login']);
   }
 }
