@@ -24,14 +24,8 @@ export const authInterceptor: HttpInterceptorFn = (
   // He asumido las rutas completas basándome en tu lista. Ajústalas si es necesario.
   const urlsExcluidas = [
     '/v1/auth/login',
-    '/v1/auth/verify-2fa',
-    '/v1/users/registrar-usuario',
-    '/v1/auth/recover-password/initiate',
-    '/v1/auth/recover-password/verify',
-    '/v1/auth/recover-password/confirm',
-    '/v1/auth/recover-username/initiate',
-    '/v1/auth/recover-username/verify',
-    '/v1/auth/recover-username/confirm'
+    '/v1/auth/create-user',
+
   ];
 
   // Obtenemos la ruta relativa de la petición, ignorando query params.
@@ -48,6 +42,9 @@ export const authInterceptor: HttpInterceptorFn = (
     authReq = req.clone({
       headers: req.headers.set('Authorization', `Bearer ${authToken}`),
     });
+
+    console.log('Body: ', authReq.body, 'Headers: ', authReq.headers, 'URL: ', authReq.url);
+    
   }
 
   return next(authReq).pipe(

@@ -5,4 +5,6 @@ export interface IUpdateTaskForm {
     descriptionTask: FormControl<string | null>;
     dueDate: FormControl<string | null>;
     priority: FormControl<string | null>;
+    status : FormControl<string | null>;
+
 }

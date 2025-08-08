@@ -1,6 +1,6 @@
 import z from "zod";
 
-const priorities: String[] = ["baja", "media", "alta"];
+const priorities: String[] = ["Baja", "Media", "Alta"];
 const status: String[] = ["Pendiente", "En progreso", "Terminada"];
 
 export const updateTaskSchemaZod = z.object({
@@ -24,4 +24,5 @@ export const updateTaskSchemaZod = z.object({
     }, {
         message: "Tipo de dato requerido",
     }).optional(),
+    
 })

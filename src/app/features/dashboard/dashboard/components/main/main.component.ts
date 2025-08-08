@@ -12,11 +12,12 @@ import { ApiResponse } from '../../../../../../core/interfaces/api/api.response.
 import { HttpErrorResponse } from '@angular/common/http';
 import { functionsService } from '../../../../../../core/utils/function-util';
 import { IUpdateTaskRequest } from '../../../../../../core/interfaces/task/IUpdateTaskRequest';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
@@ -26,7 +27,10 @@ export class MainComponent {
   private snackBar = inject(SnackNotificationService);
   protected function = inject(functionsService);
   @Input() listTasks: ITaskModelResponse[] = [];
-
+  protected task !: ITaskModelResponse;
+  protected activeStatusFilter: 'Todas' | 'Pendiente' | 'En Progreso' | 'Terminada' = 'Todas';
+  protected searchTerm: string = '';
+  protected filteredTasks: ITaskModelResponse[] = [];
 
   constructor(private readonly router: Router, public readonly dialog: MatDialog) { }
 
@@ -48,7 +52,7 @@ export class MainComponent {
     let params: IUpdateTaskRequest = {
       idTask: item._id,
       dataUpdateTask : {
-        status : "Terminada"
+        status : (item.status === 'Terminada' ? 'Pendiente' : 'Terminada')
       }
     }
 
@@ -57,18 +61,16 @@ export class MainComponent {
       error: (response) => this.handleUpdateTaskError(response),
     });
 
-    console.log(item);
   }
 
   protected handleUpdateTaskSuccess(response: ApiResponse<void>) {
 
-    console.log(response);
     this.snackBar.success(response.message);
     this.getTasks();
   }
 
   protected handleUpdateTaskError(response: HttpErrorResponse) {
-    console.log(response);
+
     this.snackBar.error(response.error.message, 10000);
   }
 
@@ -86,14 +88,13 @@ export class MainComponent {
 
   protected handleGetTasksSuccess(response: ApiResponse<ITaskModelResponse[]>) {
 
-    console.log(response);
     // this.snackBar.success(response.message);
     this.listTasks = response.data;
+    this.applyFilters();
   }
 
   protected handleGetTasksError(response: HttpErrorResponse) {
 
-    console.log(response);
     this.snackBar.error(response.error.message, 10000);
   }
 
@@ -103,30 +104,103 @@ export class MainComponent {
     this.router.navigate(['/dashboard/add-task'])
   }
 
-  protected editTask() {
+  protected editTask(item : ITaskModelResponse) {
 
-    this.dialog.open(UpdateTaskComponent, {
+    const dialogRef = this.dialog.open(UpdateTaskComponent, {
       height: 'auto',
       width: 'auto',
-      data: {}
+      data: item
+    });
+
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data) {
+        this.getTasks();
+      }
     });
   }
 
-  protected deleteTask() {
+  protected deleteTask(item : ITaskModelResponse) {
 
-    this.dialog.open(DeleteTaskComponent, {
+    const dialogRef = this.dialog.open(DeleteTaskComponent, {
       height: 'auto',
       width: 'auto',
-      data: {}
+      data: item
+    });
+
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data) {
+        this.taskService.deleteTask({idTask : item._id}).subscribe({
+          next: (response) => this.handleDeleteTasksSuccess(response),
+          error: (response) => this.handleDeleteTasksError(response),
+        });
+      }
     });
   }
 
-  protected assignTask() {
+  protected handleDeleteTasksSuccess(response: ApiResponse<void>) {
+
+    this.snackBar.success(response.message);
+    this.getTasks();
+  }
+
+  protected handleDeleteTasksError(response: HttpErrorResponse) {
+
+    this.snackBar.error(response.error.message, 10000);
+  }
+
+  protected assignTask(item : ITaskModelResponse) {
 
     this.dialog.open(AssignmentTaskComponent, {
       height: 'auto',
       width: 'auto',
-      data: {}
+      data: item
     });
+  }
+
+  protected getStatus(item : ITaskModelResponse){
+
+    if(item.status === "Terminada") return 'completed'
+
+    return ''
+    
+  }
+
+  protected getCheckTask(item : ITaskModelResponse){
+
+    if(item.status === "Terminada") return true
+
+    return false
+
+  }
+
+  // Se activa cuando el usuario hace clic en un botón de estado
+  onStatusFilterClick(status: 'Todas' | 'Pendiente' | 'En Progreso' | 'Terminada'): void {
+    this.activeStatusFilter = status;
+    this.applyFilters();
+  }
+
+  onSearchChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.searchTerm = input.value;
+    this.applyFilters();
+  }
+
+  applyFilters(): void {
+    let tempTasks = [...this.listTasks]; // Usa una copia para no modificar la lista original
+
+    // 1. Filtrar por término de búsqueda (título)
+    if (this.searchTerm) {
+      tempTasks = tempTasks.filter(task =>
+        task.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    }
+
+    // 2. Filtrar por estado
+    if (this.activeStatusFilter !== 'Todas') {
+      tempTasks = tempTasks.filter(task => task.status === this.activeStatusFilter);
+    }
+
+    // Actualizar la lista que se muestra en la vista
+    this.filteredTasks = tempTasks;
   }
 }

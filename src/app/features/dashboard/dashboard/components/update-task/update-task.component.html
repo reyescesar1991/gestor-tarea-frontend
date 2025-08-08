@@ -1,7 +1,7 @@
 <div class="modal-overlay">
     <div class="modal">
         <div class="modal-header">
-            <button class="close-btn">&times;</button>
+            <button class="close-btn" (click)="closeModal()">&times;</button>
             <h2 class="modal-title">Actualizar Tarea</h2>
             <p class="modal-subtitle">Modifica los detalles de tu tarea</p>
         </div>
@@ -66,9 +66,9 @@
                     <label for="priority" class="form-label">Prioridad</label>
                     <select id="priority" name="priority" class="form-select" formControlName="priority">
                         <option value="">Selecciona una prioridad</option>
-                        <option value="baja">Baja</option>
-                        <option value="media">Media</option>
-                        <option value="alta">Alta</option>
+                        <option value="Baja">Baja</option>
+                        <option value="Media">Media</option>
+                        <option value="Alta">Alta</option>
                     </select>
                     <p class="form-help-text">Clasifica la importancia de la tarea (opcional)</p>
                     @if (updateTaskForm.get('priority')?.invalid && (updateTaskForm.get('priority')?.dirty ||
@@ -82,12 +82,35 @@
                     </div>
                     }
                 </div>
+
+                <div class="form-group">
+                    <label for="status" class="form-label">
+                        Estatus
+                    </label>
+                    <select id="status" name="status" class="form-select" formControlName="status">
+                        <option value="En progreso">En progreso</option>
+                        <option value="Pendiente">Pendiente</option>
+                        <option value="Terminada">Terminada</option>
+                    </select>
+                    @if (updateTaskForm.get('status')?.invalid && (updateTaskForm.get('status')?.dirty ||
+                    updateTaskForm.get('status')?.touched)) {
+                    <div *ngIf="updateTaskForm.get('status')?.errors as errors">
+                        @if (errors['zodError']) {
+                        <app-label-type typeMessage="error">
+                            {{ errors['zodError'].message }}
+                        </app-label-type>
+                        }
+                    </div>
+                    }
+                </div>
+
             </form>
         </div>
 
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
-            <button type="submit" form="updateTaskForm" (click)="updateTask()" [disabled]="updateTaskForm.invalid" class="btn btn-primary">Actualizar
+            <button type="submit" form="updateTaskForm" (click)="updateTask()" [disabled]="updateTaskForm.invalid"
+                class="btn btn-primary">Actualizar
                 Tarea</button>
         </div>
     </div>

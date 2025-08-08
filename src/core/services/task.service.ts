@@ -6,6 +6,7 @@ import { ApiResponse } from "../interfaces/api/api.response.interface";
 import { ICreateTaskRequest } from "../interfaces/task/ICreateTaskRequest";
 import { ITaskModelResponse } from "../interfaces/task/ITaskModelResponse";
 import { IUpdateTaskRequest } from "../interfaces/task/IUpdateTaskRequest";
+import { IDeleteTaskRequest } from "../interfaces/task/IDeleteTaskRequest";
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +19,8 @@ export class TaskService {
     private createTaskUrl = `${this.apiUrl}/v1/task/create-task`;
     private updateTaskUrl = `${this.apiUrl}/v1/task/update-task`;
     private getTasksUrl = `${this.apiUrl}/v1/task/get-tasks`;
-
+    private deleteTaskUrl = `${this.apiUrl}/v1/task/delete-task`;
+    
     createTask(params: ICreateTaskRequest): Observable<ApiResponse<void>> {
         if (environment.useDummyData) {
 
@@ -85,5 +87,22 @@ export class TaskService {
         // Llamada real a la API. El token se guardará en el componente
         // ya que la respuesta puede ser de dos tipos.
         return this.http.post<ApiResponse<void>>(this.updateTaskUrl, params);
+    }
+
+    deleteTask(params : IDeleteTaskRequest): Observable<ApiResponse<void>> {
+        if (environment.useDummyData) {
+
+            // Simula un inicio de sesión exitoso para cualquier otro usuario
+            const dummySuccessResponse: ApiResponse<void> = {
+                message: 'Inicio de sesión exitoso (Modo Dummy).',
+                code: 200,
+                data: undefined
+            };
+            return of(dummySuccessResponse).pipe(delay(500));
+        }
+
+        // Llamada real a la API. El token se guardará en el componente
+        // ya que la respuesta puede ser de dos tipos.
+        return this.http.post<ApiResponse<void>>(this.deleteTaskUrl, params);
     }
 }

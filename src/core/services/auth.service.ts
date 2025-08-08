@@ -4,6 +4,7 @@ import { environment } from "../../app/environments/environment";
 import { delay, Observable, of } from "rxjs";
 import { ApiResponse } from "../interfaces/api/api.response.interface";
 import { ICredentials, ILoginResponse } from "../interfaces/auth/credentials.interface";
+import { IUsersResponse } from "../interfaces/users/IUsersResponse";
 
 
 @Injectable({
@@ -12,6 +13,7 @@ import { ICredentials, ILoginResponse } from "../interfaces/auth/credentials.int
 export class AuthService {
 
     private readonly TOKEN_KEY = 'auth_token';
+    private readonly USER_DATA_KEY = 'user_data';
     private http = inject(HttpClient);
     private apiUrl = environment.apiUrl;
 
@@ -45,6 +47,15 @@ export class AuthService {
     setToken(token: string): void {
         sessionStorage.setItem(this.TOKEN_KEY, token);
     }
+
+    getUserData() : IUsersResponse | null {
+        return JSON.parse(sessionStorage.getItem(this.USER_DATA_KEY) || '{}');
+    }
+
+    setUserData(userData: IUsersResponse): void {
+        sessionStorage.setItem(this.USER_DATA_KEY, JSON.stringify(userData));
+    }
+
 
     logout(): void {
         sessionStorage.removeItem(this.TOKEN_KEY);

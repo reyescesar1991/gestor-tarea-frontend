@@ -30,7 +30,11 @@ export const routes: Routes = [
                 path : 'add-task',
                 loadComponent : () => import('./features/dashboard/dashboard/components/add-task/add-task.component').then(mod => mod.AddTaskComponent),
             },
+            {
+                path : 'assignments',
+                loadComponent : () => import('./features/dashboard/dashboard/components/assignments/assignments.component').then(mod => mod.AssignmentsComponent),
+            }
         ],
         canActivate : [authGuard]
-    }
+    },
 ];

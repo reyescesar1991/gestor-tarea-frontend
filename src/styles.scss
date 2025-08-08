@@ -1,17 +1,33 @@
 :root {
-    --color-primary: #1e40af; /* Azul oscuro primario */
-    --color-secondary: #3b82f6; /* Azul brillante para acentos */
-    --color-background: #f1f5f9; /* Fondo muy claro, casi blanco */
-    --color-container-bg: #ffffff; /* Fondo del contenedor blanco */
-    --color-text-dark: #1f2937; /* Texto principal oscuro */
-    --color-text-medium: #6b7280; /* Texto secundario, descripciones */
-    --color-text-light: #9ca3af; /* Texto de placeholder */
-    --color-border: #e5e7eb; /* Borde de los inputs */
-    --color-border-focus: var(--color-primary); /* Borde de foco */
-    --color-button-bg: var(--color-secondary); /* Fondo del botón */
-    --color-link: #3b82f6; /* Color de los enlaces */
-    --color-shadow-light: rgba(0, 0, 0, 0.05); /* Sombra ligera */
-    --color-shadow-medium: rgba(0, 0, 0, 0.1); /* Sombra media */
+    --color-primary: #1e40af;
+    /* Azul oscuro primario */
+    --color-secondary: #3b82f6;
+    /* Azul brillante para acentos */
+    --color-background: #f1f5f9;
+    /* Fondo muy claro, casi blanco */
+    --color-container-bg: #ffffff;
+    /* Fondo del contenedor blanco */
+    --color-text-dark: #1f2937;
+    /* Texto principal oscuro */
+    --color-text-medium: #6b7280;
+    /* Texto secundario, descripciones */
+    --color-text-light: #9ca3af;
+    /* Texto de placeholder */
+    --color-border: #e5e7eb;
+    /* Borde de los inputs */
+    --color-border-focus: var(--color-primary);
+    /* Borde de foco */
+    --color-button-bg: var(--color-secondary);
+    /* Fondo del botón */
+    --color-link: #3b82f6;
+    /* Color de los enlaces */
+    --color-shadow-light: rgba(0, 0, 0, 0.05);
+    /* Sombra ligera */
+    --color-shadow-medium: rgba(0, 0, 0, 0.1);
+    /* Sombra media */
+    --color-success: #10b981;
+    --color-warning: #f59e0b;
+    --color-info: #3b82f6;
 }
 
 /* Estilos Generales */
@@ -166,9 +182,9 @@ body {
     box-shadow: 0 4px 12px var(--color-shadow-medium);
 }
 
-.btn-primary:disabled{
+.btn-primary:disabled {
 
-        background: #a8a8a8;
+    background: #a8a8a8;
     cursor: not-allowed;
     box-shadow: none;
 }
@@ -189,6 +205,79 @@ body {
 
 .close-btn:hover {
     color: var(--color-text-dark);
+}
+
+/* Botón de notificaciones */
+.btn-notifications {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    /* Para hacerlo circular */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-medium);
+    transition: all 0.2s ease;
+    position: relative;
+    /* Para un futuro indicador de notificación */
+}
+
+.btn-notifications:hover {
+    background-color: var(--color-background);
+    color: var(--color-text-dark);
+}
+
+.btn-notifications svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* Tooltip para el botón de notificaciones */
+.btn-notifications::after {
+    content: attr(aria-label);
+    /* Usamos el aria-label como contenido */
+    position: absolute;
+    bottom: -2.8rem;
+    /* Posición debajo del botón */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-text-dark);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    pointer-events: none;
+    /* Para que no interfiera con el hover del botón */
+    z-index: 10;
+}
+
+/* Flecha del tooltip */
+.btn-notifications::before {
+    content: '';
+    position: absolute;
+    bottom: -0.8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent var(--color-text-dark) transparent;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.btn-notifications:hover::after,
+.btn-notifications:hover::before {
+    opacity: 1;
+    visibility: visible;
 }
 
 .modal-footer {
@@ -228,5 +317,13 @@ body {
         align-items: stretch;
     }
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

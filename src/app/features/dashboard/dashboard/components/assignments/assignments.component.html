@@ -1,0 +1,49 @@
+<!-- Contenido principal -->
+<div class="main-container">
+    <!-- Encabezado de página -->
+    <div class="page-header">
+        <h1 class="page-title">Asignaciones de Usuarios</h1>
+        <p class="page-subtitle">Gestiona y visualiza todas las asignaciones de tareas del sistema</p>
+    </div>
+
+    <!-- Filtros -->
+    <div class="filters-container">
+        <div class="filters-row">
+            <input type="text" class="search-input" placeholder="Buscar por tarea o usuario..." (input)="onSearchChange($event)" [ngModel]="searchTerm">
+            <select class="filter-select" (change)="onFilterChange($event)">
+                <option value="">Todos los usuarios</option>
+                @for (item of listUsers; track $index) {
+                    <option value="{{item.username}}">{{item.username}}</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <!-- Grid de asignaciones -->
+    <div class="assignments-grid">
+        <!-- Asignación 1 -->
+
+        @for (item of filteredTasks; track $index) {
+
+        <div class="assignment-card">
+            <div class="assignment-header">
+                <h3 class="task-title">{{item.titleTask}}</h3>
+            </div>
+            <div class="assignment-info">
+                <div class="info-row">
+                    <span class="info-label">Usuario:</span>
+                    <span class="user-badge">{{item.assignUser}}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Fecha:</span>
+                    <span class="date-badge">{{functionService.formatDateToYYYYMMDD(item.createdAt)}}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">ID Tarea:</span>
+                    <span class="info-value">{{item.task}}</span>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>

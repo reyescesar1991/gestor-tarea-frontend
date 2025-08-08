@@ -1,49 +1,53 @@
 <!-- Modal Overlay -->
-    <div class="modal-overlay" id="assignModal">
-        <div class="modal-container">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h2 class="modal-title">Asignar Tarea</h2>
-                <p class="modal-subtitle">Selecciona el usuario que se encargará de esta tarea</p>
-            </div>
+<div class="modal-overlay" id="assignModal">
+    <div class="modal-container">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h2 class="modal-title">Asignar Tarea</h2>
+            <p class="modal-subtitle">Selecciona el usuario que se encargará de esta tarea</p>
+        </div>
 
-            <!-- Modal Body -->
-            <div class="modal-body">
-                <form id="assignForm" [formGroup]="assignmentTaskForm">
-                    <div class="form-group">
-                        <label for="assignedUser" class="form-label">
-                            Usuario Asignado
-                            <span class="required">*</span>
-                            <span class="user-count" id="userCount">5 usuarios disponibles</span>
-                        </label>
-                        <div class="select-container">
-                            <select id="assignedUser" name="assignedUser" class="form-select" required formControlName="assignedUser">
-                                <option value="" disabled selected>Selecciona un usuario...</option>
-                                <option value="user1_id">María García Rodríguez</option>
-                                <option value="user2_id">Carlos López Martín</option>
-                                <option value="user3_id">Ana Fernández Silva</option>
-                                <option value="user4_id">Luis Sánchez Torres</option>
-                                <option value="user5_id">Elena Ruiz Moreno</option>
-                            </select>
-                            <div class="select-arrow">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </div>
+        <!-- Modal Body -->
+        <div class="modal-body">
+            <form id="assignForm" [formGroup]="assignmentTaskForm">
+                <div class="form-group">
+                    <label for="assignedUser" class="form-label">
+                        Usuario Asignado
+                        <span class="required">*</span>
+                        <span class="user-count" id="userCount">5 usuarios disponibles</span>
+                    </label>
+                    <div class="select-container">
+                        <select id="assignedUser" name="assignedUser" class="form-select" required
+                            formControlName="assignedUser">
+                            <option value="" disabled selected>Selecciona un usuario...</option>
+                            @for (user of listUser; track $index) {
+
+                                <option [value]="user._id">
+                                    {{user.name}} {{user.lastname}} - username: {{user.username}}
+                                </option>
+                            }
+                        </select>
+                        <div class="select-arrow">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polyline points="6,9 12,15 18,9"></polyline>
+                            </svg>
                         </div>
-                        <p class="form-helper">Este usuario recibirá una notificación sobre la nueva tarea asignada</p>
                     </div>
-                </form>
-            </div>
+                    <p class="form-helper">Este usuario recibirá una notificación sobre la nueva tarea asignada</p>
+                </div>
+            </form>
+        </div>
 
-            <!-- Modal Footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" (click)="closeModal()">
-                    Cancelar
-                </button>
-                <button type="submit" class="btn btn-primary" id="assignBtn" [disabled]="assignmentTaskForm.invalid" (click)="assignTask()">
-                    Asignar Tarea
-                </button>
-            </div>
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeModal()">
+                Cancelar
+            </button>
+            <button type="submit" class="btn btn-primary" id="assignBtn" [disabled]="assignmentTaskForm.invalid"
+                (click)="assignTask()">
+                Asignar Tarea
+            </button>
         </div>
     </div>
+</div>

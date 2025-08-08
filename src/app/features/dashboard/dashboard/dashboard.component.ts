@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { UserService } from '../../../../core/services/user.service';
 import { IUsersResponse } from '../../../../core/interfaces/users/IUsersResponse';
 import { ApiResponse } from '../../../../core/interfaces/api/api.response.interface';
@@ -8,7 +8,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, RouterLink],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -31,8 +31,10 @@ export class DashboardComponent {
   protected handleGetUserDataSuccess(response: ApiResponse<IUsersResponse>) {
 
     console.log(response);
+    this.authService.setUserData(response.data);
     this.nameUser = response.data.name;
     this.lastnameUser = response.data.lastname;
+
   }
 
   protected handleGetUserDataError(response: ApiResponse<IUsersResponse>) {

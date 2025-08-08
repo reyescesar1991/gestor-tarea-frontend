@@ -16,14 +16,38 @@
         <div class="filters-section">
             <div class="filters-row">
                 <div class="search-container">
-                    <input type="text" class="search-input" placeholder="Buscar tareas por título...">
+                    <input type="text" class="search-input" placeholder="Buscar tareas por título..." (input)="onSearchChange($event)" [ngModel]="searchTerm">
                 </div>
                 <div class="filter-buttons">
-                    <button class="filter-btn active">Todas</button>
-                    <button class="filter-btn">Pendientes</button>
-                    <button class="filter-btn">En Progreso</button>
-                    <button class="filter-btn">Completadas</button>
-                </div>
+        <button 
+            class="filter-btn" 
+            [class.active]="activeStatusFilter === 'Todas'" 
+            (click)="onStatusFilterClick('Todas')"
+        >
+            Todas
+        </button>
+        <button 
+            class="filter-btn" 
+            [class.active]="activeStatusFilter === 'Pendiente'" 
+            (click)="onStatusFilterClick('Pendiente')"
+        >
+            Pendientes
+        </button>
+        <button 
+            class="filter-btn" 
+            [class.active]="activeStatusFilter === 'En Progreso'" 
+            (click)="onStatusFilterClick('En Progreso')"
+        >
+            En Progreso
+        </button>
+        <button 
+            class="filter-btn" 
+            [class.active]="activeStatusFilter === 'Terminada'" 
+            (click)="onStatusFilterClick('Terminada')"
+        >
+            Completadas
+        </button>
+    </div>
             </div>
         </div>
 
@@ -33,21 +57,21 @@
                 Lista de Tareas
             </div>
 
-            @for (item of listTasks; track $index) {
+            @for (item of filteredTasks; track $index) {
 
             <div class="task-item">
-                <input type="checkbox" class="task-checkbox" (click)="getTask(item)">
+                <input type="checkbox" class="task-checkbox" (click)="getTask(item)" [checked]="getCheckTask(item)" [ngClass]="getStatus(item)">
                 <div class="task-info">
-                    <div class="task-title">{{item.title}}</div>
-                    <div class="task-meta">Vence en {{this.function.getDaysRemainingFromString(item.dueDate)}} días</div>
+                    <div class="task-title" [ngClass]="getStatus(item)">{{item.title}}</div>
+                    <div class="task-meta">{{this.function.getDaysRemainingFromString(item.dueDate) < 0 ? 'Vencida' : 'Vence en ' + this.function.getDaysRemainingFromString(item.dueDate) + ' días'}}</div>
                 </div>
                 <div class="priority-badge priority-high" [ngClass]="getPriorityClass(item.priority)">{{item.priority}}
                 </div>
-                <div class="task-date">{{this.function.formatDateToDDMMYYYY(item.dueDate)}}</div>
+                <div class="task-date">{{this.function.formatDateToYYYYMMDD(item.dueDate)}}</div>
                 <div class="task-actions">
-                    <button class="btn-action btn-edit" (click)="editTask()">Editar</button>
-                    <button class="btn-action btn-delete" (click)="deleteTask()">Eliminar</button>
-                    <button class="btn-action btn-assignment" (click)="assignTask()">Asignar</button>
+                    <button class="btn-action btn-edit" (click)="editTask(item)">Editar</button>
+                    <button class="btn-action btn-delete" (click)="deleteTask(item)">Eliminar</button>
+                    <button class="btn-action btn-assignment" (click)="assignTask(item)">Asignar</button>
                 </div>
             </div>
             }

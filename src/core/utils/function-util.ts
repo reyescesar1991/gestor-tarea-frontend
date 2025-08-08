@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { da } from "zod/v4/locales/index.cjs";
 
 
 @Injectable({
@@ -39,7 +40,7 @@ export class functionsService {
  * @param dateString El string de la fecha en formato ISO (ej. "2025-08-18T00:00:00.000Z").
  * @returns El string de la fecha formateado como "dd-mm-yyyy".
  */
-    formatDateToDDMMYYYY(dateString: string) {
+    formatDateToYYYYMMDD(dateString: string) {
         // 1. Crear un objeto Date a partir del string.
         const date = new Date(dateString);
 
@@ -50,6 +51,6 @@ export class functionsService {
         const year = date.getUTCFullYear();
 
         // 3. Unir las partes con guiones.
-        return `${day}-${month}-${year}`;
+        return `${year}-${month}-${day}`;
     };
 }
